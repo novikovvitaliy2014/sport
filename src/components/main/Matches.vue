@@ -57,7 +57,6 @@
         </div>
       </div>
     </section>
-
   </div>
 </template>
 
@@ -94,6 +93,8 @@ export default {
   methods: {
     filterActiv () {
       this.filterActivated = true
+      const margin = document.querySelector('.filters')
+      margin.classList.add('up')
       // return this.filterActivated
     },
     unique (getter) {
@@ -131,9 +132,13 @@ export default {
 </script>
 
 <style lang="stylus">
+  .up
+    margin-top: -50px
+    transition: 1s linear
   .main
     background: #fff
   .filters
+    transition: 1s linear
     padding: 10px 0
     color: $darkgreen
     width: 100%
@@ -147,6 +152,7 @@ export default {
       font-size: $font-size-h3
       font-family: Arial,Helvetica Neue,Helvetica,sans-serif
       text-transform: uppercase
+      margin-top: 10px
   .filters__container
     background: lighten($primary, 90%)
     background: #fff
@@ -166,12 +172,12 @@ export default {
       font-family: Arial,Helvetica Neue,Helvetica,sans-serif
       text-transform: uppercase
       color: $darkgreen
-      margin: 50px auto 0
+      margin: 30px auto 0
   .match__wrapper
     width: 100%
     background: linear-gradient(to bottom, $green 0% 10%, $darkgreen 10% 30%, $green 30% 50%, $darkgreen 50% 70%, $green 70% 90%, $darkgreen 90% 100%)
     background: linear-gradient(to right bottom, $lightgreen, $green)
-    margin: 50px auto 0
+    margin: 30px auto 0
   .match__container
     padding-top: 20px
     max-width: 1100px
@@ -213,37 +219,46 @@ export default {
       flex-direction: column
   .team
     width: 30%
+    overflow: hidden
+    padding: 0 15px
     @media (max-width $breakpoint-xs-max)
-      width: 90%
+      width: 100%
       margin: 0 auto 20px
       box-shadow: none
-      padding: 10px 0
+      padding: 10px 15px
     display: flex
     flex-direction: column
     background: linear-gradient(to right bottom, $green, $darkgreen)
-    padding: 10px
+    padding: 5px 0
     min-height: 100px
     box-shadow: -20px 30px 80px 0px grey
+    border: 1px solid transparent
     ol
       color: #fff
       border-bottom: 1px solid #fff
       border-top: 1px solid #fff
-      padding: 15px auto
+      padding: 15px 20px
       @media (max-width $breakpoint-xs-max)
-        padding-left: 30px
+        padding-left: 10px
       li
-        padding-top: 5px
+        padding: 5px 0
     p, h6, a
       text-align: center
       color: #fff
-  .btn
-    display: flex
-    margin: 10px auto
+      margin: 5px auto 0
+  .booking
+    padding: 0 5px
   .q-form .q-field__label
     color: #fff
-    font-size: $font-size-h3
+    font-size: $font-size-h5
+    @media ($breakpoint-sm-max $breakpoint-xs-min)
+      font-size: $font-size-h6
     min-height: 30px
   .q-field--standard .q-field__control:after
     color: #fff
+  .q-form .q-field
+    margin-left: 5px
+  .q-btn-toggle, .q-toggle
+    margin: 5px auto
 
 </style>

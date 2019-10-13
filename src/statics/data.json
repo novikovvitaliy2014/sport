@@ -1,61 +1,27 @@
 {
-  "matches": [
+  "matchesData": [
     {
-      "id": "1",
       "city": "Donetsk",
-      "adress": "artema str, 1",
-      "sport": "Football",
-      "date": "2019.10.19.",
-      "time": "16.00.",
-      "teams": [
-         {
-            "id": "1"
-          },
-          {
-            "id": "2"
-          },
-          {
-            "id": "3"
-          }
-      ]
-    },
-    {
-      "city": "Makeevka",
-      "id": "2",
       "adress": "Artema str, 1",
       "sport": "Football",
       "date": "2019.10.19.",
-      "time": "16.00.",
-      "teams": [
-        {
-          "id": "1"
-        },
-        {
-          "id": "2"
-        },
-        {
-          "id": "3"
-        }
-      ]
+      "time": "16.00.-17.00."
+    },
+    {
+      "city": "Makeevka",
+      "adress": "Lenina str, 1",
+      "sport": "Football",
+      "date": "2019.10.19.",
+      "time": "20.00.-21.00",
+      "teams": []
     },
     {
       "city": "Snegnoe",
-      "id": "3",
-      "adress": "Teka str, 1",
+      "adress": "Mira str, 1",
       "sport": "Gandball",
       "date": "2019.10.19.",
-      "time": "29.00.",
-      "teams": [
-        {
-          "id": "1"
-        },
-        {
-          "id": "2"
-        },
-        {
-          "id": "3"
-        }
-      ]
+      "time": "19.00.-20.00.",
+      "teams": []
     }
   ]
 }

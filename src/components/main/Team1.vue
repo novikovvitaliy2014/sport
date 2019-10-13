@@ -20,11 +20,9 @@
         v-model="pseudo"
         label="Имя *"
         lazy-rules
-        dark
         :rules="nameRules"
       />
       <q-input
-        dark
         filled
         type="number"
         v-model="tel"
@@ -33,11 +31,10 @@
         :rules="telephoneRules"
       />
       <q-input
-        dark
         filled
         type="email"
         :rules="emailRules"
-        label="Электронная почта *"
+        label="Эл. почта *"
         v-model='email'
       />
       <h6 title="Выбранный уровень будет виден другим игрокам для оптимального выбора команды">
@@ -88,7 +85,7 @@
                  <!-- </div> -->
       </q-toggle>
       <q-btn color="primary"
-             class="btn"
+             class="btn__takePart"
              type="submit"
              label="Забронировать"
              v-if="btnBooked && freePlaces && globalBtns"
@@ -204,9 +201,10 @@ export default {
     }
   },
   created () {
-    // if (this.$store.getters.)
-    if (this.match.teams[0].players) {
-      this.registeredPlayersArray = Object.values(this.match.teams[0].players)
+    if (this.match.teams) {
+      if (this.match.teams[0].players) {
+        this.registeredPlayersArray = Object.values(this.match.teams[0].players)
+      }
     }
     this.matchData.city = this.match.city
     this.matchData.adress = this.match.adress
@@ -224,8 +222,16 @@ export default {
     font-weight: bold
     color: $secondary
   .btn__takePart
+    display: flex
+    align-items: center
+    align-self: center
     background: $primary
     margin: auto auto 0
-    width: 70%
+    width: 90%
     color: #fff
+    @media (max-width $breakpoint-xs-max)
+      margin 0 auto
+      width: 70%
+  .booking
+    margin-left: 0
 </style>

@@ -21,8 +21,9 @@ git commit -m 'deploy'
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
 
 # если вы публикуете по адресу https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:gfkids/sport.git master:gh-pages
+# git push -f git@github.com:gfkids/sport.git master:gh-pages
+git push -f git@github.com:novikovvitaliy2014/sport.git master:gh-pages
 
-cd -
+cd ../../
 # Сразу отправить папку dist в gh-pages
 # git subtree push --prefix dist origin gh-pages

@@ -34,7 +34,7 @@
         filled
         type="email"
         :rules="emailRules"
-        label="Электронная почта *"
+        label="Эл. почта *"
         v-model='email'
       />
       <h6 title="Выбранный уровень будет виден другим игрокам для оптимального выбора команды">
@@ -85,7 +85,7 @@
                  <!-- </div> -->
                </q-toggle>
       <q-btn color="primary"
-             class="btn"
+             class="btn__takePart"
              type="submit"
              label="Забронировать"
              v-if="btnBooked && freePlaces && globalBtns"
@@ -201,9 +201,10 @@ export default {
     }
   },
   created () {
-    // if (this.$store.getters.)
-    if (this.match.teams[1].players) {
-      this.registeredPlayersArray = Object.values(this.match.teams[1].players)
+    if (this.match.teams) {
+      if (this.match.teams[1].players) {
+        this.registeredPlayersArray = Object.values(this.match.teams[1].players)
+      }
     }
     this.matchData.city = this.match.city
     this.matchData.adress = this.match.adress

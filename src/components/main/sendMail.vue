@@ -9,9 +9,9 @@
           label="Электронная почта *"
           v-model='email'
         />
-        <q-btn color="primary"
+        <q-btn
           type="Submit"
-          class="btn"
+          class="btn__send"
           label="Подписаться"/>
       </q-form>
     </section>
@@ -65,6 +65,14 @@ export default {
     p
       padding: 10px
       width: 100%
+    .match__sender .q-form
+      display: flex
+  .match__sender .q-form .btn__send
+    display: flex
+    background: $darkgreen
+    color: #fff
+    width: 50%
+    margin: 0 auto
   .match__sender .q-field__label
     color: $darkgreen
   .match__sender .q-field__control-container .q-field__label

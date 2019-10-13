@@ -1,6 +1,6 @@
 <template>
   <section class="rules row">
-    <section class="oferta rules__container col-10" oncopy="alert('Копирование запрещено');return false">
+    <section class="oferta rules__container col-md-8 col-lg-8 col-xl-6 col-sm-10 col-xs-12" oncopy="alert('Копирование запрещено');return false">
       <article class="oferta__point">
         <h2 class="oferta__title">Пользовательское соглашение и политика конфиденциальности.</h2>
         <p class="oferta__point">Если Вы не согласны с данным Соглашением или с отдельными его пунктами, Вы вправе отказаться от использования сайта incitysport.com (далее просто Сервиса).</p>
