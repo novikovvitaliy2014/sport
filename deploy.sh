@@ -6,6 +6,7 @@ set -e
 # сборка
 quasar build
 
+
 # переход в каталог сборки
 cd dist/spa
 
