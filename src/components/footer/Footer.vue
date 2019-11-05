@@ -10,7 +10,8 @@
         <div class="header__logo-icon">
         </div>
       </div>
-      <p>Cooperative sport</p>
+      <p  class="footer__desc">Для сохранения сайта в закладки нажмите CTRL + D или "звёздочку"</p>
+      <!-- <p>Cooperative sport</p> -->
     </div>
   </footer>
 </template>
@@ -56,6 +57,8 @@
     width: 30px
     background: url('../../statics/icons/ball.svg') no-repeat
     background-size: 20px
-    background-position: 10px 3px
+    background-position: 10px center
+  .footer__desc
+    max-width: 60%
 
 </style>

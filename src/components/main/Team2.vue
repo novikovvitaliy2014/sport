@@ -2,6 +2,7 @@
   <section class="team">
     <booked :match="match" :team="2" v-if="bookedAlert"></booked>
     <p>Команда № 2</p>
+    <p class="team__shirt">Темные футболки</p>
     <ol>
       <li v-for="player in registeredPlayersArray" :key="player.tel">
         <span>{{ player.name }} / </span>
@@ -24,20 +25,21 @@
       />
       <q-input
         filled
-        type="number"
-        v-model="tel"
-        label="Номер телефона *"
-        lazy-rules
-        :rules="telephoneRules"
-      />
-      <q-input
-        filled
         type="email"
         :rules="emailRules"
         label="Эл. почта *"
         v-model='email'
       />
-      <h6 title="Выбранный уровень будет виден другим игрокам для оптимального выбора команды">
+      <q-input
+        filled
+        type="number"
+        v-model="tel"
+        label="Номер телефона *"
+        hint="Для получения уведомлений об отмене матча"
+        lazy-rules
+        :rules="telephoneRules"
+      />
+      <h6 class="booking__title" title="Выбранный уровень будет виден другим игрокам для оптимального выбора команды">
         Выберите свой уровень
       </h6>
       <q-btn-toggle
@@ -55,7 +57,7 @@
           {label: 'Любитель', value: 'Любитель'}
         ]"
       />
-      <h6 title="Выбранный возраст будет виден другим игрокам для оптимального выбора команды">
+      <h6 class="booking__title booking__title--age" title="Выбранный возраст будет виден другим игрокам для оптимального выбора команды">
         Выберите свой возраст
       </h6>
       <q-btn-toggle
@@ -88,6 +90,11 @@
              class="btn__takePart"
              type="submit"
              label="Забронировать"
+             id="submitButton"
+             @click="fbq('track', 'CompleteRegistration', {
+                value: 1.00,
+                currency: 'RUB',
+              })"
              v-if="btnBooked && freePlaces && globalBtns"
               />
     </q-form>
@@ -112,7 +119,7 @@ export default {
       accept: false,
       bookedAlert: false,
       btnBooked: false,
-      placesQuantity: 5,
+      placesQuantity: 6,
       form: false,
       btnForm: true,
       profi: 'Опытный игрок',
@@ -134,7 +141,7 @@ export default {
       ],
       newPlayer: {},
       fullTeam: false,
-      playersQuantity: 5,
+      playersQuantity: 6,
       registeredPlayersArray: []
     }
   },
@@ -176,6 +183,7 @@ export default {
         this.newPlayer.tel = this.tel
         this.newPlayer.profi = this.profi
         this.newPlayer.age = this.age
+        this.newPlayer.random = this.pseudo + Math.random()
         this.registeredPlayersArray.push(this.newPlayer)
         this.$store.dispatch('module1/globalBtnsDisable')
         const newPlayerData = {
@@ -193,16 +201,16 @@ export default {
         this.matchData.time = this.match.time
         this.matchData.sport = this.match.sport
         this.matchData.id = this.match.id
-        this.matchData.team = '0'
+        this.matchData.team = '1'
         localStorage.setItem('myMatch', JSON.stringify(this.matchData))
         localStorage.setItem('myName', JSON.stringify(this.newPlayer.name))
-        localStorage.setItem('myTel', JSON.stringify(this.newPlayer.tel))
+        localStorage.setItem('myRandom', JSON.stringify(this.newPlayer.random))
       }
     }
   },
   created () {
     if (this.match.teams) {
-      if (this.match.teams[1].players) {
+      if (this.match.teams[1]) {
         this.registeredPlayersArray = Object.values(this.match.teams[1].players)
       }
     }
@@ -211,7 +219,6 @@ export default {
     this.matchData.date = this.match.date
     this.matchData.time = this.match.time
     this.matchData.sport = this.match.sport
-    console.log(this.matchData)
   }
 }
 </script>

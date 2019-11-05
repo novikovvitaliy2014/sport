@@ -11,15 +11,23 @@
         <h2 v-if="title_7">Каждому по команде!</h2>
         <h2 v-if="title_8">Играй. Кайфуй. Худей.</h2>
         <h2 v-if="title_9">Дух соревнования</h2>
+        <h2 v-if="title_10">Оздоровление спортом</h2>
+        <h2 v-if="title_11">Играй. Кайфуй. Худей.</h2>
+        <h2 v-if="title_12">Худей красиво</h2>
+        <h2 v-if="title_13">Играй. Кайфуй. Худей.</h2>
+        <h2 v-if="title_14">Генератор эндорфинов</h2>
+        <h2 v-if="title_15">Заряд бодрости</h2>
+        <h2 v-if="title_16">Все в спортзал!</h2>
         <!-- Не всегда получается собрать несколько команд для игры в футбол.  -->
         <p>Вы можете принять участие в любительской игре, не собирая команду. </p>
-        <p>Забронируйте место в команде из таких же как Вы активных игроков-любителей в подходящем для Вас матче и приходите на матч.</p>
-        <p>Услуги сервиса бесплатные, игрок платит только свою долю аренды зала на матч (от 30-ти до 60-ти рублей).</p>
+        <p>Забронируйте место в команде из таких же как Вы активных игроков-любителей в подходящем для Вас матче и приходите на игру.</p>
+        <!-- <p>Услуги сервиса бесплатные, игрок платит только свою долю аренды зала на матч (от 40 до 80 гривен).</p> -->
+        <p>Цена участия игрока в матче составляет от 25 до 80 гривен. Без предоплаты.</p>
         <router-link to="/rules"
            tag="a"
            class="btn btn--rules"
            >
-          Подробно о правилах
+          Правила
         </router-link>
       </section>
     </div>
@@ -38,7 +46,14 @@ export default {
       title_6: false,
       title_7: false,
       title_8: false,
-      title_9: false
+      title_9: false,
+      title_10: false,
+      title_11: false,
+      title_12: false,
+      title_13: false,
+      title_14: false,
+      title_15: false,
+      title_16: false
     }
   },
   computed: {
@@ -49,7 +64,7 @@ export default {
     }
   },
   created () {
-    let random = this.getRandomInt(9)
+    let random = this.getRandomInt(15)
     random === 0 ? this.title_1 = true : this.title_1 = false
     random === 1 ? this.title_2 = true : this.title_2 = false
     random === 2 ? this.title_3 = true : this.title_3 = false
@@ -59,6 +74,13 @@ export default {
     random === 6 ? this.title_7 = true : this.title_7 = false
     random === 7 ? this.title_8 = true : this.title_8 = false
     random === 8 ? this.title_9 = true : this.title_9 = false
+    random === 9 ? this.title_10 = true : this.title_10 = false
+    random === 10 ? this.title_11 = true : this.title_11 = false
+    random === 11 ? this.title_12 = true : this.title_12 = false
+    random === 12 ? this.title_13 = true : this.title_13 = false
+    random === 13 ? this.title_14 = true : this.title_14 = false
+    random === 14 ? this.title_15 = true : this.title_15 = false
+    random === 15 ? this.title_16 = true : this.title_16 = false
     // if (random === 0) {
     //   this.title_1 = true
     // }
@@ -120,4 +142,6 @@ export default {
     background: $green
     @media (max-width $breakpoint-xs-max)
       margin: 10px auto
+    &:hover
+      background: $darkgreen
 </style>

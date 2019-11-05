@@ -10,24 +10,23 @@ export const getMatches = ({ commit }, payload) => {
       match.id = matchId
       matchesUpdated.push(match)
       firebaseDB.ref('matches/matchesData/').child(matchId).update({ id: matchId })
-      const teams = []
-      // if (match.teams)
       if (match.teams) {
-        teams.push(match.teams)
-        for (let team of teams) {
+        for (let team of match.teams) {
+          let teams = match.teams
           let teamId = teams.indexOf(team)
-          let players = team.players
           let matchID = matchId
-          for (let key in players) {
-            matchesUpdated[matchID].teams[teamId].players[key].id = key
-            matchesUpdated[matchID].teams[teamId].players[key].tel = null
-            matchesUpdated[matchID].teams[teamId].players[key].email = null
-            firebaseDB.ref('matches/matchesData/' + matchID + '/' + 'teams/' + teamId + '/' + 'players').child(key).update({ id: key })
+          if (team !== undefined) {
+            let players = team.players
+            for (let key in players) {
+              matchesUpdated[matchID].teams[teamId].players[key].id = key
+              matchesUpdated[matchID].teams[teamId].players[key].tel = null
+              matchesUpdated[matchID].teams[teamId].players[key].email = null
+              firebaseDB.ref('matches/matchesData/' + matchID + '/' + 'teams/' + teamId + '/' + 'players').child(key).update({ id: key })
+            }
           }
         }
       }
     }
-    console.log(matchesUpdated)
     commit('getMatches', { matchesUpdated })
   })
 }
@@ -44,7 +43,7 @@ export const deletePlayer = ({ commit, state }, payload) => {
   })
   let players = Object.values(match.teams[payload.team].players)
   const player = players.find((player) => {
-    return player.tel === payload.myTel
+    return player.randomID === payload.myRandom
   })
   firebaseDB.ref('matches/matchesData/' + payload.matchID + '/' + 'teams/' + payload.team + '/' + 'players/' + player.id).remove()
   commit('deletePlayer', {
@@ -56,7 +55,8 @@ export const registerPlayer = ({ commit }, payload) => {
   const newPlayerState = {
     name: payload.newPlayer.name,
     profi: payload.newPlayer.profi,
-    age: payload.newPlayer.age
+    age: payload.newPlayer.age,
+    randomID: payload.newPlayer.random
   }
   const newPlayerConf = {
     name: payload.newPlayer.name,

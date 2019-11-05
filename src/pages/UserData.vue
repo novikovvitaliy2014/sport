@@ -18,12 +18,13 @@
       />
     </section>
     <div class="user-data__container col-8" v-if="!myMatch">
+      <h1>Личный кабинет</h1>
       <p>Вы не зарегистрированы на матч.</p>
       <p>Повторно можно зарегистрироваться спустя сутки после предыдущей регистрации. </p>
-      <div v-if="nextDay">
+     <!--  <div v-if="nextDay">
         <p>В данном случае, следующая регистрация возможна после:</p>
         <span> {{ nextDay }} </span>
-      </div>
+      </div> -->
       <p>Если у Вас есть вопросы или предложения - напишите нам по адресу:</p>
       <p>incitysport@gmail.com</p>
     </div>
@@ -39,7 +40,7 @@ export default {
     return {
       myMatch: null,
       myName: null,
-      myTel: null,
+      myRandom: null,
       nextDay: '',
       nextTime: new Date()
     }
@@ -47,15 +48,15 @@ export default {
   methods: {
     deletePlayer () {
       const data = {
-        myTel: this.myTel,
+        myRandom: this.myRandom,
         matchID: this.myMatch.id,
         team: this.myMatch.team
       }
+      this.$store.dispatch('module1/deletePlayer', data)
       this.myMatch = null
       localStorage.removeItem('myMatch')
       localStorage.removeItem('myName')
-      localStorage.removeItem('myTel')
-      this.$store.dispatch('module1/deletePlayer', data)
+      localStorage.removeItem('myRandom')
       // this.myName = null
       // localStorage.removeItem('expirationDate')
     }
@@ -71,7 +72,7 @@ export default {
     this.$store.dispatch('module1/getMatches')
     let matchStorage = JSON.parse(localStorage.getItem('myMatch'))
     let nameStorage = JSON.parse(localStorage.getItem('myName'))
-    let telStorage = JSON.parse(localStorage.getItem('myTel'))
+    let randomStorage = JSON.parse(localStorage.getItem('myRandom'))
     if (matchStorage) {
       this.myMatch = matchStorage
     }
@@ -79,7 +80,7 @@ export default {
       this.myName = nameStorage
     }
     if (matchStorage) {
-      this.myTel = telStorage
+      this.myRandom = randomStorage
     }
     // let now = Date.now()
     let expirationDate = JSON.parse(localStorage.getItem('expirationDate'))

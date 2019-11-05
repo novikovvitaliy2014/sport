@@ -11,7 +11,7 @@ export const deletePlayer = (state, payload) => {
   console.log(payload.playerData.matchID)
   console.log(state.matches)
   let matchID = payload.playerData.matchID
-  state.matches.matchesUpdated[matchID].teams[payload.playerData.team].players[payload.playerID] = null
+  delete state.matches.matchesUpdated[matchID].teams[payload.playerData.team].players[payload.playerID]
   let updatedPlayers = state.matches
   console.log(updatedPlayers)
   // const match = state.matches.find((project) => {

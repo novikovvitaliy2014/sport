@@ -1,7 +1,7 @@
 <template>
   <div flex-center class="main row">
     <h2 v-if="!matches" class="main__container col-11">Loading</h2>
-    <section class="filters">
+    <!-- <section class="filters">
       <h3>Выберите матч</h3>
       <q-form class="filters__container">
         <q-select
@@ -21,37 +21,44 @@
           </template>
         </q-select>
       </q-form>
-    </section>
+    </section> -->
     <section>
 
     </section>
-    <section v-if="filterActivated" class="matches">
-      <h2>Открытые матчи для регистрации</h2>
+    <!-- <section v-if="filterActivated" class="matches"> -->
+    <section v-if="true" class="matches">
+      <!-- <h2 v-if="filteredMatches.length === 0" class="matches__title">Не найден матч с указанными параметрами</h2>
+      <h2 v-if="filteredMatches.length > 0" class="matches__title">Открытые матчи для регистрации</h2> -->
+      <h2 v-if="true" class="matches__title">Открытые матчи для регистрации</h2>
       <div
                v-for="match in filteredMatches"
                :key="match.id"
                class="match__wrapper row">
         <div class="match match_id row match__container col-11">
           <div class="match__data">
-            <p>{{ match.sport }}</p>
-            <p>{{ match.city }}</p>
-            <p>{{ match.adress }}</p>
-            <p>{{ match.date }}</p>
-            <p>{{ match.time }}</p>
+            <p class="match__data-item">{{ match.sport }}</p>
+            <p class="match__data-item">{{ match.city }}</p>
+            <p class="match__data-item">{{ match.adress }}</p>
+            <div class="match__data-item">
+              <p>{{ formatDate(match.date) }}</p>
+              <p>{{ weekDay(match.date) }}</p>
+            </div>
+            <p class="match__data-item">{{ match.time }}</p>
           </div>
           <div class="row">
             <section class="match__description col-md-10 col-sm-10 col-xs-12" >
               <h3>Описание матча</h3>
               <!-- <p>Услуги сервиса InCitySport бесплатные.</p> -->
-              <p>Оплата игроками за аренду зала производится администратору зала непосредственно перед матчем. Оплату равномерно рассчитывают сами игроки исходя из количества игроков и цены аренды зала. Для данного матча цена участия для одного игрока составит <strong>от 30-ти до 60-ти рублей</strong>.</p>
-              <p>В каждой команде 5 игроков.</p>
-
+              <p>Оплата игроками за аренду зала производится администратору зала непосредственно перед матчем. Оплату равномерно рассчитывают сами игроки исходя из количества игроков и цены аренды зала. </p>
+              <p>{{ match.desc }}</p>
+              <p>Выбирая команду, постарайтесь учесть рекомендации по цвету футболки для каждой команды (для лучшей идентификации игроков одной команды).</p>
+              <p>В каждой команде 6 мест для регистрации.</p>
             </section>
           </div>
           <section class="teams">
             <team1 :match="match" :matchIndex="match.id"/>
             <team2 :match="match" :matchIndex="match.id"/>
-            <team3 :match="match" :matchIndex="match.id"/>
+            <team3 v-if="match.teamsNumber > 2" :match="match" :matchIndex="match.id"/>
           </section>
           <sendMail :match="match"/>
         </div>
@@ -91,19 +98,89 @@ export default {
     }
   },
   methods: {
-    filterActiv () {
-      this.filterActivated = true
-      const margin = document.querySelector('.filters')
-      margin.classList.add('up')
-      // return this.filterActivated
+    formatDate (day) {
+      let date = new Date(day)
+      let year = date.getFullYear()
+      let month = date.getMonth()
+      let monthRus = month + 1
+      let dt = date.getDate()
+      if (month === 0) {
+        monthRus = 'Января'
+      }
+      if (month === 1) {
+        monthRus = 'Февраля'
+      }
+      if (month === 2) {
+        monthRus = 'Марта'
+      }
+      if (month === 3) {
+        monthRus = 'Апреля'
+      }
+      if (month === 4) {
+        monthRus = 'Мая'
+      }
+      if (month === 5) {
+        monthRus = 'Июня'
+      }
+      if (month === 6) {
+        monthRus = 'Июля'
+      }
+      if (month === 7) {
+        monthRus = 'Августа'
+      }
+      if (month === 8) {
+        monthRus = 'Сентября'
+      }
+      if (month === 9) {
+        monthRus = 'Октября'
+      }
+      if (month === 10) {
+        monthRus = 'Ноября'
+      }
+      if (month === 11) {
+        monthRus = 'Декабря'
+      }
+      return dt + ' ' + monthRus + ' ' + year
     },
-    unique (getter) {
-      let matchesArray = this.matches
-      return [...new Set(matchesArray.map(getter))]
-      // return [...new Set(matches.map(obj => obj.city))]
+    weekDay (day) {
+      let dayDate = new Date(day)
+      let dayNumber = dayDate.getDay()
+      if (dayNumber === 0) {
+        return 'Воскресенье'
+      }
+      if (dayNumber === 1) {
+        return 'Понедельник'
+      }
+      if (dayNumber === 2) {
+        return 'Вторник'
+      }
+      if (dayNumber === 3) {
+        return 'Среда'
+      }
+      if (dayNumber === 4) {
+        return 'Четверг'
+      }
+      if (dayNumber === 5) {
+        return 'Пятница'
+      }
+      if (dayNumber === 6) {
+        return 'Суббота'
+      }
     }
+    // filterActiv () {
+    //   this.filterActivated = true
+    //   const margin = document.querySelector('.filters')
+    //   margin.classList.add('up')
+    //   // return this.filterActivated
+    // },
+    // unique (getter) {
+    //   let matchesArray = this.matches
+    //   return [...new Set(matchesArray.map(getter))]
+    //   // return [...new Set(matches.map(obj => obj.city))]
+    // }
   },
   computed: {
+
     matches () {
       return this.$store.getters['module1/getMatches'].matchesUpdated
     },
@@ -165,14 +242,18 @@ export default {
     @media (max-width $breakpoint-xs-max)
       width: 80%
   .matches
-    border-top: 2px solid $primary
+    width: 100%
     h2
       font-weight: bold
       font-size: $font-size-h3
       font-family: Arial,Helvetica Neue,Helvetica,sans-serif
       text-transform: uppercase
       color: $darkgreen
+      width: 100%
+      text-align: center
       margin: 30px auto 0
+  .matches__title
+    border-top: none
   .match__wrapper
     width: 100%
     background: linear-gradient(to bottom, $green 0% 10%, $darkgreen 10% 30%, $green 30% 50%, $darkgreen 50% 70%, $green 70% 90%, $darkgreen 90% 100%)
@@ -198,9 +279,10 @@ export default {
     flex-wrap: wrap
     justify-content: center
     background: lightgrey
-    p
+  .match__data .match__data-item
       display: flex
       margin: auto
+      flex-wrap: wrap
       font-weight: bold
       color: $darkgreen
       min-height: 40px
@@ -209,18 +291,21 @@ export default {
       align-self: center
       align-items: center
       width: 15%
+      min-width: 140px
       @media (max-width $breakpoint-xs-max)
         width: 30%
+      p
+        margin-bottom: 0
+        color: $secondary
   .teams
     width: 100%
     display: flex
-    justify-content: space-between
+    justify-content: space-around
     @media (max-width $breakpoint-xs-max)
       flex-direction: column
   .team
     width: 30%
     overflow: hidden
-    padding: 0 15px
     @media (max-width $breakpoint-xs-max)
       width: 100%
       margin: 0 auto 20px
@@ -232,7 +317,6 @@ export default {
     padding: 5px 0
     min-height: 100px
     box-shadow: -20px 30px 80px 0px grey
-    border: 1px solid transparent
     ol
       color: #fff
       border-bottom: 1px solid #fff
@@ -242,7 +326,7 @@ export default {
         padding-left: 10px
       li
         padding: 5px 0
-    p, h6, a
+    p, a
       text-align: center
       color: #fff
       margin: 5px auto 0
