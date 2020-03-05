@@ -1,8 +1,8 @@
 <template>
   <section class="team">
     <booked :match="match" :team="2" v-if="bookedAlert"></booked>
-    <p>Команда № 2</p>
-    <p class="team__shirt">Темные футболки</p>
+    <p>{{ $t('team2') }}</p>
+    <p class="team__shirt">{{ $t('darkShirts') }}</p>
     <ol>
       <li v-for="player in registeredPlayersArray" :key="player.tel">
         <span>{{ player.name }} / </span>
@@ -10,8 +10,8 @@
         <span>{{ player.age }}</span>
       </li>
     </ol>
-    <p v-if="freePlaces" class="team__freePlaces">Свободных мест:  <span>{{ freePlaces }}</span></p>
-    <p v-if="freePlaces <= null">Все места в этой команде забронированы.</p>
+    <p v-if="freePlaces" class="team__freePlaces">{{ $t('freePlaces') }}  <span>{{ freePlaces }}</span></p>
+    <p v-if="freePlaces <= null">{{ $t('noPlaces') }}</p>
     <q-form v-if="btnBooked"
       @submit="onSubmit"
       class="booking q-gutter-md"
@@ -19,7 +19,7 @@
       <q-input
         filled
         v-model="pseudo"
-        label="Имя *"
+        :label="$t('name')"
         lazy-rules
         :rules="nameRules"
       />
@@ -27,52 +27,48 @@
         filled
         type="email"
         :rules="emailRules"
-        label="Эл. почта *"
+        :label="$t('email')"
         v-model='email'
       />
       <q-input
         filled
-        type="number"
         v-model="tel"
-        label="Номер телефона *"
-        hint="Для получения уведомлений об отмене матча"
+        :label="$t('telephone')"
         lazy-rules
         :rules="telephoneRules"
       />
-      <h6 class="booking__title" title="Выбранный уровень будет виден другим игрокам для оптимального выбора команды">
-        Выберите свой уровень
+      <h6 class="booking__title">
+        {{ $t('chooseLevel') }}
       </h6>
       <q-btn-toggle
         v-model="profi"
         spread
         class="my-custom-toggle"
-        no-caps
         rounded
-        unelevated
-        toggle-color="primary"
-        color="grey"
-        text-color="white"
+        push
+        toggle-color="green"
+        color="white"
+        text-color="green"
         :options="[
-          {label: 'Опытный игрок', value: 'Опытный игрок'},
-          {label: 'Любитель', value: 'Любитель'}
+          {label: this.$t('profi'), value: this.$t('profi')},
+          {label: this.$t('amator'), value: this.$t('amator')}
         ]"
       />
-      <h6 class="booking__title booking__title--age" title="Выбранный возраст будет виден другим игрокам для оптимального выбора команды">
-        Выберите свой возраст
+      <h6 class="booking__title booking__title--age">
+        {{ $t('chooseAge') }}
       </h6>
       <q-btn-toggle
         v-model="age"
         spread
         class="my-custom-toggle"
-        no-caps
         rounded
-        unelevated
-        toggle-color="primary"
-        color="grey"
-        text-color="white"
+        push
+        toggle-color="green"
+        color="white"
+        text-color="green"
         :options="[
-          {label: '18-30 лет', value: '18-30 лет'},
-          {label: 'Старше 30-ти лет', value: 'Старше 30-ти лет'}
+          {label: this.$t('young'), value: this.$t('young')},
+          {label: this.$t('old'), value: this.$t('old')}
         ]"
       />
       <q-toggle
@@ -82,27 +78,23 @@
                     <router-link to="/rules"
                        class="header__top-link"
                        >
-                    Принимаю условия пользовательского соглашения
+                    {{ $t('terms') }}
                     </router-link>
                  <!-- </div> -->
                </q-toggle>
       <q-btn color="primary"
              class="btn__takePart"
              type="submit"
-             label="Забронировать"
-             id="submitButton"
-             @click="fbq('track', 'CompleteRegistration', {
-                value: 1.00,
-                currency: 'RUB',
-              })"
+             :label="$t('book')"
+             id="submitButton2"
              v-if="btnBooked && freePlaces && globalBtns"
               />
     </q-form>
-    <q-btn color="primary"
+    <!-- <q-btn color="primary"
            @click="openForm"
            class="btn__takePart"
            label="Участвовать"
-           v-if="btnForm && freePlaces > null && globalBtns" />
+           v-if="btnForm && freePlaces > null && globalBtns" /> -->
   </section>
 </template>
 
@@ -118,25 +110,25 @@ export default {
       matchData: {},
       accept: false,
       bookedAlert: false,
-      btnBooked: false,
+      btnBooked: true,
       placesQuantity: 6,
       form: false,
       btnForm: true,
-      profi: 'Опытный игрок',
-      age: '18-30 лет',
+      profi: this.$t('amator'),
+      age: this.$t('young'),
       pseudo: null,
       email: null,
       tel: null,
       nameRules: [
-        v => !!v || 'Заполните поле'
+        v => !!v || this.$t('field')
       ],
       telephoneRules: [
-        v => !!v || 'Заполните поле',
-        v => (v && v.length >= 10) || 'Минимальное количество символов - 10'
+        v => !!v || this.$t('field'),
+        v => (v && v.length >= 10) || this.$t('min10')
       ],
       emailRules: [
         v => !!v || 'Заполните поле',
-        v => /.+@.+/.test(v) || 'Неверный формат',
+        v => /.+@.+/.test(v) || this.$t('format'),
         v => (v && v.length >= 8) || 'Минимальное количество символов - 8'
       ],
       newPlayer: {},
@@ -167,7 +159,7 @@ export default {
           color: 'red-5',
           textColor: 'white',
           icon: 'warning',
-          message: 'Вы не приняли условия пользовательского соглашения'
+          message: this.$t('noTerms')
         })
       } else {
         // this.$q.notify({

@@ -1,33 +1,20 @@
 <template>
   <section class="about row">
+    <!-- <h1 class="about__container row col-6">{{ $t('failed') }}</h1> -->
     <div class="about__container row col-11">
       <section class="about__desc col-sm-8 col-xs-12 col-md-5 col-lg-6 col-xl-6">
-        <h2 v-if="title_1">Спортивное настроение</h2>
-        <h2 v-if="title_2">Физкульт - Привет!</h2>
-        <h2 v-if="title_3">В здоровом теле - здоровый дух</h2>
-        <h2 v-if="title_4">Бей. Беги. Худей.</h2>
-        <h2 v-if="title_5">Радость спорта</h2>
-        <h2 v-if="title_6">Блестящих побед!</h2>
-        <h2 v-if="title_7">Каждому по команде!</h2>
-        <h2 v-if="title_8">Играй. Кайфуй. Худей.</h2>
-        <h2 v-if="title_9">Дух соревнования</h2>
-        <h2 v-if="title_10">Оздоровление спортом</h2>
-        <h2 v-if="title_11">Играй. Кайфуй. Худей.</h2>
-        <h2 v-if="title_12">Худей красиво</h2>
-        <h2 v-if="title_13">Играй. Кайфуй. Худей.</h2>
-        <h2 v-if="title_14">Генератор эндорфинов</h2>
-        <h2 v-if="title_15">Заряд бодрости</h2>
-        <h2 v-if="title_16">Все в спортзал!</h2>
-        <!-- Не всегда получается собрать несколько команд для игры в футбол.  -->
-        <p>Вы можете принять участие в любительской игре, не собирая команду. </p>
-        <p>Забронируйте место в команде из таких же как Вы активных игроков-любителей в подходящем для Вас матче и приходите на игру.</p>
+        <h2>{{ title }}</h2>
+        <div  v-html="$t('about')">
+          <!-- <p>Вы можете принять участие в любительской игре, не собирая команду. </p>
+          <p>Забронируйте место в команде из таких же, как Вы, активных игроков-любителей в подходящем для Вас матче и приходите на игру.</p>
+          <p>Цена участия игрока в матче - от 50 до 200 гривен, в зависимости от матча. Без предоплаты.</p> -->
+        </div>
         <!-- <p>Услуги сервиса бесплатные, игрок платит только свою долю аренды зала на матч (от 40 до 80 гривен).</p> -->
-        <p>Цена участия игрока в матче составляет от 25 до 80 гривен. Без предоплаты.</p>
         <router-link to="/rules"
            tag="a"
            class="btn btn--rules"
            >
-          Правила
+          {{ $t('rules') }}
         </router-link>
       </section>
     </div>
@@ -38,58 +25,60 @@
 export default {
   data () {
     return {
-      title_1: false,
-      title_2: false,
-      title_3: false,
-      title_4: false,
-      title_5: false,
-      title_6: false,
-      title_7: false,
-      title_8: false,
-      title_9: false,
-      title_10: false,
-      title_11: false,
-      title_12: false,
-      title_13: false,
-      title_14: false,
-      title_15: false,
-      title_16: false
     }
   },
   computed: {
+    title () {
+      if (this.$i18n.locale === 'ru') {
+        let random = this.getRandomInt(13)
+        if (random === 0) {
+          return 'Блестящих побед!'
+        } else if (random === 1) {
+          return 'Спортивное настроение'
+        } else if (random === 2) {
+          return 'Физкульт - Привет!'
+        } else if (random === 3) {
+          return 'В здоровом теле - здоровый дух'
+        } else if (random === 4) {
+          return 'Бей. Беги. Худей.'
+        } else if (random === 5) {
+          return 'Радость спорта'
+        } else if (random === 6) {
+          return 'Блестящих побед!'
+        } else if (random === 7) {
+          return 'Каждому по команде!'
+        } else if (random === 8) {
+          return 'Дух соревнования'
+        } else if (random === 9) {
+          return 'Играй. Кайфуй. Худей.'
+        } else if (random === 10) {
+          return 'Играй. Кайфуй. Худей.'
+        } else if (random === 11) {
+          return 'Играй. Кайфуй. Худей.'
+        } else if (random === 12) {
+          return 'Генератор эндорфинов'
+        } else if (random === 13) {
+          return 'Заряд бодрости'
+        }
+      } else if (this.$i18n.locale === 'en-us') {
+        return 'Sport spirit'
+      } else if (this.$i18n.locale === 'ua') {
+        let random = this.getRandomInt(2)
+        if (random === 0) {
+          return 'Блискучих перемог!'
+        } else if (random === 1) {
+          return 'Дух змагання'
+        } else if (random === 2) {
+          return 'Грай. Кайфуй. Біжи.'
+        }
+      }
+      return 'inCitySport'
+    }
   },
   methods: {
     getRandomInt (max) {
       return Math.floor(Math.random() * Math.floor(max))
     }
-  },
-  created () {
-    let random = this.getRandomInt(15)
-    random === 0 ? this.title_1 = true : this.title_1 = false
-    random === 1 ? this.title_2 = true : this.title_2 = false
-    random === 2 ? this.title_3 = true : this.title_3 = false
-    random === 3 ? this.title_4 = true : this.title_4 = false
-    random === 4 ? this.title_5 = true : this.title_5 = false
-    random === 5 ? this.title_6 = true : this.title_6 = false
-    random === 6 ? this.title_7 = true : this.title_7 = false
-    random === 7 ? this.title_8 = true : this.title_8 = false
-    random === 8 ? this.title_9 = true : this.title_9 = false
-    random === 9 ? this.title_10 = true : this.title_10 = false
-    random === 10 ? this.title_11 = true : this.title_11 = false
-    random === 11 ? this.title_12 = true : this.title_12 = false
-    random === 12 ? this.title_13 = true : this.title_13 = false
-    random === 13 ? this.title_14 = true : this.title_14 = false
-    random === 14 ? this.title_15 = true : this.title_15 = false
-    random === 15 ? this.title_16 = true : this.title_16 = false
-    // if (random === 0) {
-    //   this.title_1 = true
-    // }
-    // if (random === 1) {
-    //   this.title_2 = true
-    // }
-    // if (random === 2) {
-    //   this.title_3 = true
-    // }
   }
 }
 </script>

@@ -1,32 +1,24 @@
 <template>
   <q-page class="user-data row">
     <section class="user-data__container col-8" v-if="myMatch">
-      <h1>Личный кабинет</h1>
-      <p>Вы зарегистрированы на матч:</p>
-      <p>Имя: <span>{{ myName }}</span></p>
-      <p>Город: <span>{{ myMatch.city }}</span></p>
-      <p>Адрес: <span>{{ myMatch.adress }}</span></p>
-      <p>Вид спорта: <span>{{ myMatch.sport }}</span></p>
-      <p>Дата: <span>{{ myMatch.date }}</span></p>
-      <p>Время матча: <span>{{ myMatch.time }}</span></p>
-      <p>Если Вы зарегистрировались на игру, но у Вас изменились планы, пожалуйста, сообщайте об отмене, так как это важно другим игрокам. В случае регистрации менее 10 человек (2 команды) из возможных 15-ти (3 команды) за 2 часа до начала матча, то матч отменяется.</p>
+      <div v-html="$t('userStart')"></div>
+      <ul>
+      <!-- <p>Имя:</p> --> <li>{{ myName }}</li>
+      <!-- <p>Город: </p> --><li>{{ myMatch.city }}</li>
+      <!-- <p>Адрес: </p> --><li>{{ myMatch.adress }}</li>
+      <!-- <p>Вид спорта: </p> --><li>{{ myMatch.sport }}</li>
+      <!-- <p>Дата: </p> --><li>{{ myMatch.date }}</li>
+      <!-- <p>Время матча:</p> --> <li>{{ myMatch.time }}</li>
+      </ul>
+      <p>{{ $t('userFinal') }}</p>
       <q-btn
         color="primary"
         class="btn"
-        label="Отменить участие"
+        :label="$t('refuse')"
         @click="deletePlayer"
       />
     </section>
-    <div class="user-data__container col-8" v-if="!myMatch">
-      <h1>Личный кабинет</h1>
-      <p>Вы не зарегистрированы на матч.</p>
-      <p>Повторно можно зарегистрироваться спустя сутки после предыдущей регистрации. </p>
-     <!--  <div v-if="nextDay">
-        <p>В данном случае, следующая регистрация возможна после:</p>
-        <span> {{ nextDay }} </span>
-      </div> -->
-      <p>Если у Вас есть вопросы или предложения - напишите нам по адресу:</p>
-      <p>incitysport@gmail.com</p>
+    <div class="user-data__container col-8" v-if="!myMatch" v-html="$t('noReg')">
     </div>
   </q-page>
 </template>
@@ -57,7 +49,7 @@ export default {
       localStorage.removeItem('myMatch')
       localStorage.removeItem('myName')
       localStorage.removeItem('myRandom')
-      // this.myName = null
+      this.myName = null
       // localStorage.removeItem('expirationDate')
     }
   },
@@ -104,7 +96,7 @@ export default {
   .user-data__container
     margin: 50px auto 0
     max-width: 900px
-    span
+    ul li
       color: $primary
       font-size: $font-size-h5
       padding-bottom: 30px

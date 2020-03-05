@@ -4,6 +4,9 @@ export const getMatches = (state) => {
 export const globalBtns = (state) => {
   return state.globalBtns
 }
+// export const subscribeBtnTel = (state) => {
+//   return state.subscribeBtnTel
+// }
 export const errorAlert = (state) => {
   return state.errorAlert
 }

@@ -5,15 +5,13 @@ export const getMatches = (state, payload) => {
 export const globalBtnsDisable = (state) => {
   state.globalBtns = false
 }
+// export const subscribeTelBtnDisable = (state) => {
+//   state.subscribeBtnTel = false
+// }
 export const deletePlayer = (state, payload) => {
-  console.log(payload)
-  console.log(payload.playerData)
-  console.log(payload.playerData.matchID)
-  console.log(state.matches)
   let matchID = payload.playerData.matchID
   delete state.matches.matchesUpdated[matchID].teams[payload.playerData.team].players[payload.playerID]
-  let updatedPlayers = state.matches
-  console.log(updatedPlayers)
+  // let updatedPlayers = state.matches
   // const match = state.matches.find((project) => {
   //   return match.id === payload.matchID
   // })

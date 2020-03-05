@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# git add .
+# git commit -m "autodeploy"
+# git push novikov master
+
 # остановить публикацию при ошибках
 set -e
 
@@ -27,3 +31,6 @@ git push -f git@github.com:novikovvitaliy2014/sport.git master:gh-pages
 cd ../../
 # Сразу отправить папку dist в gh-pages
 # git subtree push --prefix dist origin gh-pages
+
+# git push novikov master
+# git credential-cache exit

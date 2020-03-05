@@ -7,7 +7,8 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     boot: [
       'firebase',
-      'axios'
+      'axios',
+      'i18n'
     ],
 
     css: [
@@ -63,7 +64,8 @@ module.exports = function (ctx) {
         'QList',
         'QItem',
         'QItemSection',
-        'QItemLabel'
+        'QItemLabel',
+        'QCheckbox'
       ],
 
       directives: [

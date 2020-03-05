@@ -14,7 +14,8 @@ $primary   = $green
 $primary-light  = lighten(#21BA45, 20%)
 $secondary = #f91
 $accent    = #9C27B0
-
+$telegram  = #0088cc
+$facebook  = #3b5998
 $positive  = #027BE3
 $negative  = #C10015
 $info      = #31CCEC
@@ -108,97 +109,3 @@ font-size-adaptive(font-mobile,font-tab,font-desk)
     font-size font-tab
   desk
     font-size font-desk
-
-body
-  font-family: $font-base
-  color: $color-base
-  background-color: #fff
-  position: relative
-  z-index: 3
-html
-  box-sizing: border-box
-  font-size-adaptive(14px,16px,18px)
-  font-family: $font-base
-*,
-*::before,
-*::after
-  box-sizing: inherit
-.main
-  margin-bottom: 0
-img
-  width: 100%
-  max-width: 100%
-  height: auto
-q
-  line-height: $line-height-h4
-a
-  text-decoration: none
-h1,h2,h3,h4,h5,h6
-  font-family: $font-heading
-  font-style: normal
-  font-weight: 400
-  margin: 0 0 1rem 0
-  text-align: center
-  text-transform: none
-  padding: 0 20px
-h1,h2
-  text-transform: uppercase
-  color: $color-dark
-ul
-  padding-left: 25px
-ul li,
-ol li
-  font-size: $font-size-h6
-  line-height: $line-height-h6
-h1
-  font-size: $font-size-h1
-  line-height: $line-height-h1
-h2
-  font-size: $font-size-h2
-  line-height: $line-height-h2
-  margin-top: 1.618rem
-h3
-  font-size: $font-size-h3
-  line-height: $line-height-h3
-  margin-top: 1.618rem
-h4
-  font-size: $font-size-h4
-  line-height: $line-height-h4
-  color: $color-main
-h5
-  font-size: $font-size-h5
-  line-height: $line-height-h5
-h6
-  font-size: $font-size-base
-  line-height: $line-height-base
-p
-  font-size: $font-size-h5
-  line-height: $line-height-h5
-  width: 100%
-.btn
-  display: block
-  font-size: $font-size-h6
-  font-weight: bold
-  text-align: center
-  min-width: 50%
-  max-width: 500px
-  background-color: $darkgreen
-  border-radius: 5px
-  color: #fff
-  padding: 15px
-  text-transform: uppercase
-  margin: 20px auto 10px auto
-  &:hover
-    background-color: $green
-  &:disabled
-    background-color: $color-light
-    border: 1px solid $color-main
-    color: grey
-  &--container
-    container( $col-11, $col-9, $col-9, 500px )
-    margin-bottom: 20px
-.private-projects__project-btn
-  width: 100%
-.msg-error
-  color: #ff5252
-  text-align: center

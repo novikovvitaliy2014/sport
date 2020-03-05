@@ -5,12 +5,12 @@
         <router-link to="/"
            tag="p"
            >
-          InCitySport
+          inCitySport
         </router-link>
         <div class="header__logo-icon">
         </div>
       </div>
-      <p  class="footer__desc">Для сохранения сайта в закладки нажмите CTRL + D или "звёздочку"</p>
+      <p  class="footer__desc">{{ $t('footer') }}</p>
       <!-- <p>Cooperative sport</p> -->
     </div>
   </footer>
