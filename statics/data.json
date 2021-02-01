@@ -1,0 +1,14 @@
+{
+  "data" : [
+    {
+      "adress" : "Манеж Rejo-ВДНГ, пр. Академіка Глушкова, 1",
+      "city" : "Kiev",
+      "date" : "11 April 2020, 15:30",
+      "desc" : "2100 гр.",
+      "id" : 4,
+      "sport" : "Football",
+      "teamsNumber" : 3,
+      "time" : "15.30.-17.00."
+    }
+  ]
+}
